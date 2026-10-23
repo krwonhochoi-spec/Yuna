@@ -1,0 +1,329 @@
+{
+ "voices": {
+  "p001": {
+   "path": "voices/p001.mp3",
+   "type": "audio/mpeg"
+  },
+  "p002": {
+   "path": "voices/p002.mp3",
+   "type": "audio/mpeg"
+  },
+  "p003": {
+   "path": "voices/p003.mp3",
+   "type": "audio/mpeg"
+  },
+  "p004": {
+   "path": "voices/p004.mp3",
+   "type": "audio/mpeg"
+  },
+  "p005": {
+   "path": "voices/p005.mp3",
+   "type": "audio/mpeg"
+  },
+  "p006": {
+   "path": "voices/p006.mp3",
+   "type": "audio/mpeg"
+  },
+  "p007": {
+   "path": "voices/p007.mp3",
+   "type": "audio/mpeg"
+  },
+  "p008": {
+   "path": "voices/p008.mp3",
+   "type": "audio/mpeg"
+  },
+  "p009": {
+   "path": "voices/p009.mp3",
+   "type": "audio/mpeg"
+  },
+  "p010": {
+   "path": "voices/p010.mp3",
+   "type": "audio/mpeg"
+  },
+  "p011": {
+   "path": "voices/p011.mp3",
+   "type": "audio/mpeg"
+  },
+  "p012": {
+   "path": "voices/p012.mp3",
+   "type": "audio/mpeg"
+  },
+  "p013": {
+   "path": "voices/p013.mp3",
+   "type": "audio/mpeg"
+  },
+  "p014": {
+   "path": "voices/p014.mp3",
+   "type": "audio/mpeg"
+  },
+  "p015": {
+   "path": "voices/p015.mp3",
+   "type": "audio/mpeg"
+  },
+  "p016": {
+   "path": "voices/p016.mp3",
+   "type": "audio/mpeg"
+  },
+  "p017": {
+   "path": "voices/p017.mp3",
+   "type": "audio/mpeg"
+  },
+  "p018": {
+   "path": "voices/p018.mp3",
+   "type": "audio/mpeg"
+  },
+  "p019": {
+   "path": "voices/p019.mp3",
+   "type": "audio/mpeg"
+  },
+  "p020": {
+   "path": "voices/p020.mp3",
+   "type": "audio/mpeg"
+  },
+  "p021": {
+   "path": "voices/p021.mp3",
+   "type": "audio/mpeg"
+  },
+  "p022": {
+   "path": "voices/p022.mp3",
+   "type": "audio/mpeg"
+  },
+  "p023": {
+   "path": "voices/p023.mp3",
+   "type": "audio/mpeg"
+  },
+  "p024": {
+   "path": "voices/p024.mp3",
+   "type": "audio/mpeg"
+  },
+  "p025": {
+   "path": "voices/p025.mp3",
+   "type": "audio/mpeg"
+  },
+  "p026": {
+   "path": "voices/p026.mp3",
+   "type": "audio/mpeg"
+  },
+  "p027": {
+   "path": "voices/p027.mp3",
+   "type": "audio/mpeg"
+  },
+  "p028": {
+   "path": "voices/p028.mp3",
+   "type": "audio/mpeg"
+  },
+  "p029": {
+   "path": "voices/p029.mp3",
+   "type": "audio/mpeg"
+  },
+  "p030": {
+   "path": "voices/p030.mp3",
+   "type": "audio/mpeg"
+  },
+  "p031": {
+   "path": "voices/p031.mp3",
+   "type": "audio/mpeg"
+  },
+  "p032": {
+   "path": "voices/p032.mp3",
+   "type": "audio/mpeg"
+  },
+  "p033": {
+   "path": "voices/p033.mp3",
+   "type": "audio/mpeg"
+  },
+  "p034": {
+   "path": "voices/p034.mp3",
+   "type": "audio/mpeg"
+  },
+  "p035": {
+   "path": "voices/p035.mp3",
+   "type": "audio/mpeg"
+  },
+  "p036": {
+   "path": "voices/p036.mp3",
+   "type": "audio/mpeg"
+  },
+  "p037": {
+   "path": "voices/p037.mp3",
+   "type": "audio/mpeg"
+  },
+  "p038": {
+   "path": "voices/p038.mp3",
+   "type": "audio/mpeg"
+  },
+  "p039": {
+   "path": "voices/p039.mp3",
+   "type": "audio/mpeg"
+  },
+  "p040": {
+   "path": "voices/p040.mp3",
+   "type": "audio/mpeg"
+  },
+  "p041": {
+   "path": "voices/p041.mp3",
+   "type": "audio/mpeg"
+  },
+  "p042": {
+   "path": "voices/p042.mp3",
+   "type": "audio/mpeg"
+  },
+  "p043": {
+   "path": "voices/p043.mp3",
+   "type": "audio/mpeg"
+  },
+  "p044": {
+   "path": "voices/p044.mp3",
+   "type": "audio/mpeg"
+  },
+  "p045": {
+   "path": "voices/p045.mp3",
+   "type": "audio/mpeg"
+  },
+  "p046": {
+   "path": "voices/p046.mp3",
+   "type": "audio/mpeg"
+  },
+  "p047": {
+   "path": "voices/p047.mp3",
+   "type": "audio/mpeg"
+  },
+  "p048": {
+   "path": "voices/p048.mp3",
+   "type": "audio/mpeg"
+  },
+  "p049": {
+   "path": "voices/p049.mp3",
+   "type": "audio/mpeg"
+  },
+  "p050": {
+   "path": "voices/p050.mp3",
+   "type": "audio/mpeg"
+  },
+  "p051": {
+   "path": "voices/p051.mp3",
+   "type": "audio/mpeg"
+  },
+  "p052": {
+   "path": "voices/p052.mp3",
+   "type": "audio/mpeg"
+  },
+  "p053": {
+   "path": "voices/p053.mp3",
+   "type": "audio/mpeg"
+  },
+  "p054": {
+   "path": "voices/p054.mp3",
+   "type": "audio/mpeg"
+  },
+  "p055": {
+   "path": "voices/p055.mp3",
+   "type": "audio/mpeg"
+  },
+  "p056": {
+   "path": "voices/p056.mp3",
+   "type": "audio/mpeg"
+  },
+  "p057": {
+   "path": "voices/p057.mp3",
+   "type": "audio/mpeg"
+  },
+  "p058": {
+   "path": "voices/p058.mp3",
+   "type": "audio/mpeg"
+  },
+  "p059": {
+   "path": "voices/p059.mp3",
+   "type": "audio/mpeg"
+  },
+  "p060": {
+   "path": "voices/p060.mp3",
+   "type": "audio/mpeg"
+  },
+  "p061": {
+   "path": "voices/p061.mp3",
+   "type": "audio/mpeg"
+  },
+  "p062": {
+   "path": "voices/p062.mp3",
+   "type": "audio/mpeg"
+  },
+  "p063": {
+   "path": "voices/p063.mp3",
+   "type": "audio/mpeg"
+  },
+  "p064": {
+   "path": "voices/p064.mp3",
+   "type": "audio/mpeg"
+  },
+  "p065": {
+   "path": "voices/p065.mp3",
+   "type": "audio/mpeg"
+  },
+  "p066": {
+   "path": "voices/p066.mp3",
+   "type": "audio/mpeg"
+  },
+  "p067": {
+   "path": "voices/p067.mp3",
+   "type": "audio/mpeg"
+  },
+  "p068": {
+   "path": "voices/p068.mp3",
+   "type": "audio/mpeg"
+  },
+  "p069": {
+   "path": "voices/p069.mp3",
+   "type": "audio/mpeg"
+  },
+  "p070": {
+   "path": "voices/p070.mp3",
+   "type": "audio/mpeg"
+  },
+  "p071": {
+   "path": "voices/p071.mp3",
+   "type": "audio/mpeg"
+  },
+  "p072": {
+   "path": "voices/p072.mp3",
+   "type": "audio/mpeg"
+  },
+  "p073": {
+   "path": "voices/p073.mp3",
+   "type": "audio/mpeg"
+  },
+  "p074": {
+   "path": "voices/p074.mp3",
+   "type": "audio/mpeg"
+  },
+  "p075": {
+   "path": "voices/p075.mp3",
+   "type": "audio/mpeg"
+  },
+  "p076": {
+   "path": "voices/p076.mp3",
+   "type": "audio/mpeg"
+  },
+  "p077": {
+   "path": "voices/p077.mp3",
+   "type": "audio/mpeg"
+  },
+  "p078": {
+   "path": "voices/p078.mp3",
+   "type": "audio/mpeg"
+  },
+  "p079": {
+   "path": "voices/p079.mp3",
+   "type": "audio/mpeg"
+  },
+  "p080": {
+   "path": "voices/p080.mp3",
+   "type": "audio/mpeg"
+  },
+  "p081": {
+   "path": "voices/p081.mp3",
+   "type": "audio/mpeg"
+  }
+ },
+ "captions": {}
+}
