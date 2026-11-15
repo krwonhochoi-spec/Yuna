@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#ec5a8c"><meta name="apple-mobile-web-app-title" content="윤아사진첩"><meta name="application-name" content="윤아사진첩"><style>#gm,#tools{display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>윤아 사진첩</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -123,30 +123,58 @@ const track = $("track"), bubble = $("bubble"), counter = $("counter");
 /* ---------- shared voice data (published files) ---------- */
 let data = { voices: {}, captions: {} };      // voices[id] = {path,type}; captions[id] = text
 const localUrl = {};                           // id -> blob: URL for recordings made in this view
-fetch("data/voices.json?ts=" + Date.now(), { cache: "no-store" })
-  .then(r => r.ok ? r.json() : null).then(j => { if (j) { data = { voices: j.voices || {}, captions: j.captions || {} }; render(); } })
-  .catch(() => {});
+let voicesReady = false;
+function loadVoices(n) {
+  fetch("data/voices.json?ts=" + Date.now(), { cache: "no-store" })
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(j => { data = { voices: j.voices || {}, captions: j.captions || {} }; voicesReady = true; render(); })
+    .catch(() => { if (n < 4) setTimeout(() => loadVoices(n + 1), 1200 * (n + 1)); else bubble.innerHTML = '<span class="hint">할머니 목소리 목록을 불러오지 못했어요. 화면을 새로 고쳐 주세요.</span>'; });
+}
+loadVoices(0);
 const captionOf = p => data.captions[p.id] || p.caption;
 const hasVoice = p => !!(localUrl[p.id] || data.voices[p.id]);
 
 /* ---------- Audio controller: one voice at a time ---------- */
 const Audio1 = (() => {
   const el = new Audio(); el.preload = "auto";
-  let onEnd = null, koVoice = null;
+  const ALLOW_TTS = false;   // 녹음이 있는 사진은 어떤 경우에도 기계 목소리로 대체하지 않음
+  let onEnd = null, koVoice = null, token = 0;
+  const blobs = {}, loading = {};   // path -> blob: URL (미리 내려받은 할머니 목소리)
   const pickVoice = () => { const v = speechSynthesis.getVoices(); koVoice = v.find(x => /ko[-_]KR/i.test(x.lang)) || v.find(x => /^ko/i.test(x.lang)) || null; };
   if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
-  el.addEventListener("ended", () => onEnd && onEnd());
-  el.addEventListener("error", () => onEnd && onEnd());
+  const finish = () => { const f = onEnd; onEnd = null; f && f(); };
+  const note = t => bubble.insertAdjacentHTML("beforeend", '<span class="hint" style="display:block;margin-top:6px">' + t + "</span>");
+  el.addEventListener("ended", finish);
+  el.addEventListener("error", () => { if (!onEnd) return; note("목소리 파일을 불러오지 못했어요. 인터넷을 확인하고 다시 눌러 주세요."); finish(); });
+  function prefetch(p) {
+    const v = data.voices[p.id];
+    if (!v || localUrl[p.id] || blobs[v.path] || loading[v.path]) return;
+    loading[v.path] = fetch(v.path).then(r => r.ok ? r.blob() : Promise.reject())
+      .then(b => { blobs[v.path] = URL.createObjectURL(new Blob([b], { type: v.type || "audio/mpeg" })); })
+      .catch(() => {}).then(() => { delete loading[v.path]; });
+  }
   function stop() {
+    token++;   // 이전 재생 요청의 뒤늦은 실패 처리를 무효화
     try { el.pause(); el.currentTime = 0; } catch (e) {}
     if ("speechSynthesis" in window) speechSynthesis.cancel();
-    const f = onEnd; onEnd = null; f && f();
+    finish();
   }
   function play(p, done) {
     stop(); onEnd = done;
-    const src = localUrl[p.id] || (data.voices[p.id] && data.voices[p.id].path);
-    if (src) { el.src = src; el.play().catch(() => speak(captionOf(p))); return; }
-    speak(captionOf(p));
+    const my = token, v = data.voices[p.id];
+    const src = localUrl[p.id] || (v && (blobs[v.path] || v.path));
+    if (!src) {
+      if (ALLOW_TTS) { speak(captionOf(p)); return; }
+      note(voicesReady ? "이 사진은 아직 할머니 녹음이 없어요." : "할머니 목소리를 불러오는 중이에요. 잠시 후 다시 눌러 주세요.");
+      setTimeout(() => { if (my === token) finish(); }, 1500);
+      return;
+    }
+    el.src = src;
+    const pr = el.play();
+    if (pr && pr.catch) pr.catch(err => {
+      if (my !== token || (err && err.name === "AbortError")) return;
+      el.addEventListener("canplay", () => { if (my === token) el.play().catch(() => { if (my === token) finish(); }); }, { once: true });
+    });
   }
   function speak(text) {
     if (!("speechSynthesis" in window)) { setTimeout(() => onEnd && onEnd(), 2500); return; }
@@ -155,7 +183,7 @@ const Audio1 = (() => {
     u.onend = u.onerror = () => onEnd && onEnd();
     speechSynthesis.speak(u);
   }
-  return { play, stop };
+  return { play, stop, prefetch };
 })();
 
 /* ---------- caption with Korean word chips ---------- */
@@ -191,6 +219,7 @@ function render() {
 function updateCounter() {
   counter.textContent = `${label(group)} · ${idx + 1} / ${list.length}`;
   $("prev").disabled = idx <= 0; $("next").disabled = idx >= list.length - 1;
+  for (let k = idx - 1; k <= idx + 2; k++) if (list[k]) Audio1.prefetch(list[k]);   // 앞뒤 사진 목소리를 미리 받아 두기
 }
 function go(i) { idx = Math.max(0, Math.min(list.length - 1, i)); track.scrollTo({ left: idx * track.clientWidth, behavior: "smooth" }); updateCounter(); }
 
